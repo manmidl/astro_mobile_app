@@ -1,0 +1,27 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Astro" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">#04D9FF</item>
+        <item name="colorPrimaryVariant">#04D9FF</item>
+    </style>
+
+    <style name="MyCustomDropdownStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="boxStrokeColor">@color/white</item> <!-- Устанавливаем черный цвет рамки -->
+        <item name="boxCornerRadiusTopStart">6dp</item> <!-- Устанавливаем большее закругление верхнего левого угла -->
+        <item name="boxCornerRadiusTopEnd">6dp</item> <!-- Устанавливаем большее закругление верхнего правого угла -->
+        <item name="boxCornerRadiusBottomStart">6dp</item> <!-- Устанавливаем большее закругление нижнего левого угла -->
+        <item name="boxCornerRadiusBottomEnd">6dp</item> <!-- Устанавливаем большее закругление нижнего правого угла -->
+        <item name="android:textColor">@color/white</item> <!-- Устанавливаем черный цвет текста -->
+    </style>
+
+    <style name="MyCustomDropdownStyleZodiac" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="boxStrokeColor">@color/white</item> <!-- Устанавливаем черный цвет рамки -->
+        <item name="boxCornerRadiusTopStart">6dp</item> <!-- Устанавливаем большее закругление верхнего левого угла -->
+        <item name="boxCornerRadiusTopEnd">6dp</item> <!-- Устанавливаем большее закругление верхнего правого угла -->
+        <item name="boxCornerRadiusBottomStart">6dp</item> <!-- Устанавливаем большее закругление нижнего левого угла -->
+        <item name="boxCornerRadiusBottomEnd">6dp</item> <!-- Устанавливаем большее закругление нижнего правого угла -->
+        <item name="android:textColor">@color/white</item> <!-- Устанавливаем черный цвет текста -->
+    </style>
+
+</resources>

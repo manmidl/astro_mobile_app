@@ -1,0 +1,60 @@
+<resources>
+    <!--Welcome-->
+    <string name="app_name">Astro</string>
+    <string name="login">ВОЙТИ</string>
+    <string name="no_registration">ВОЙТИ БЕЗ РЕГИСТРАЦИИ</string>
+    <string name="registration">ЗАРЕГИСТРИРОВАТЬСЯ</string>
+    <string name="welcome_astro">Доброе пожаловать в Astro</string>
+    <string name="reset_password">Забыли пароль? Восстановите его!</string>
+
+    <!-- Add info -->
+    <string name="add_info">Введите дополнительную информацию</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="what_is_your_zodiac_sign">Какой ваш знак зодиака?</string>
+    <string name="what_is_your_name">Как Вас зовут?</string>
+
+    <!--Create Account-->
+    <string name="done">ГОТОВО!</string>
+    <string name="user_agreement">Продолжая Вы соглашаетесь с Политикой Конфиденциальности</string>
+    <string name="create_account">Создание аккаунта</string>
+    <string name="enter_email">Введите вашу эл.почту</string>
+    <string name="create_password">Придумайте пароль</string>
+    <string name="resume">Продолжить</string>
+    <string name="register_with_google">Авторизация через Google</string>
+
+    <!--Login-->
+    <string name="login_in_account">Вход</string>
+    <string name="enter_password">Введите пароль</string>
+    <string name="login_google">Войти с помощью Google</string>
+
+    <!--Check Email-->
+    <string name="check_email_text">На ваш адрес эл.почты выслано письмо с ссылкой для подтверждения вашего email, перейдите по ней и нажмите кнопку \"Продолжить\" для дальнейших действий.</string>
+    <string name="confirmedEmail">Я подтвердил email</string>
+
+    <!--ResetPassword-->
+    <string name="text_reset_enter_email_password">Напишите адрес и мы вышлем ссылку для восстановления пароля.</string>
+    <string name="text_send_email_reset_password">На ваш email отправлено письмо со сбросом пароля!</string>
+
+    <!--Select web-site-->
+    <string name="select_web_site">Выберите сайт</string>
+    <!--Main activity-->
+    <string name="loading_horoskope">Загрузка гороскопа...</string>
+    <string name="loading_zodiac_sign">Знак зодиака загрузка</string>
+    <string name="select_element">Выберите стихию:</string>
+    <!--UserSettings-->
+    <string name="user_name">Имя</string>
+    <string name="user_sign">Знак зодиака</string>
+    <string name="user_password">Пароль</string>
+    <string name="user_website_default">Сайт по умолчанию</string>
+    <string name="user_support">Поддержка</string>
+    <string name="change">Изменить</string>
+    <string name="change_name">Изменить имя</string>
+    <string name="change_zodiac_sign">Изменить знак зодиака</string>
+    <string name="change_password">Изменить пароль</string>
+    <string name="change_website_default">Изменить веб-сайт по умолчанию</string>
+    <string name="old_password">Введите старый пароль</string>
+    <string name="new_password">Введите новый пароль</string>
+    <string name="save">Сохранить изменения</string>
+    <string name="support">Написать в поддержку</string>
+    <string name="log_out_account">Выйти из аккаунта</string>
+</resources>
