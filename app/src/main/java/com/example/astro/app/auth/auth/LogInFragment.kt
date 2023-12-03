@@ -1,4 +1,4 @@
-package com.example.astro.app.auth.auth_classes
+package com.example.astro.app.auth.auth
 
 import android.content.Context
 import android.content.Intent

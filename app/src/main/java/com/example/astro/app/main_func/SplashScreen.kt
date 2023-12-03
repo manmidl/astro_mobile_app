@@ -6,15 +6,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import com.example.astro.R
-import com.example.astro.app.auth.auth_classes.EntrActivity
+import com.example.astro.app.auth.auth.EntrActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
 class SplashScreen : AppCompatActivity(){
 
     private lateinit var mAuth : FirebaseAuth
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
@@ -25,7 +23,6 @@ class SplashScreen : AppCompatActivity(){
         super.onRestart()
         checkMethodLogIn()
     }
-
 
     private fun checkMethodLogIn(){
         val sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)

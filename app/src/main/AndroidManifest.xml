@@ -19,7 +19,7 @@
             android:exported="false"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".app.auth.auth_classes.EntrActivity"
+            android:name=".app.auth.auth.EntrActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
         <activity

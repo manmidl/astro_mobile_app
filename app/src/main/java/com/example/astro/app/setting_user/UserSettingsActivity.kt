@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.example.astro.R
-import com.example.astro.app.auth.auth_classes.EntrActivity
+import com.example.astro.app.auth.auth.EntrActivity
 import com.example.astro.app.interfaces.WorkWithDatabase
 import com.example.astro.app.main_func.MainActivity
 import com.example.astro.databinding.ActivityUserSettingsBinding

@@ -1,4 +1,4 @@
-package com.example.astro.app.auth.auth_classes
+package com.example.astro.app.auth.auth
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

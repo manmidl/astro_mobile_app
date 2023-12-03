@@ -1,4 +1,4 @@
-package com.example.astro.app.auth.auth_classes
+package com.example.astro.app.auth.auth
 
 import android.content.Context
 import android.content.Intent
@@ -8,12 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Toast
-import androidx.core.view.isVisible
 import com.example.astro.R
 import com.example.astro.app.main_func.MainActivity
 import com.example.astro.databinding.FragmentAddInfBinding
-import com.google.firebase.database.collection.LLRBNode.Color
 
 
 class AddInfFragment : Fragment() {

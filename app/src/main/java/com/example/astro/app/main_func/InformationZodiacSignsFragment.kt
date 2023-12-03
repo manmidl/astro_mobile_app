@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import com.example.astro.R
-import com.example.astro.app.main_func.parsing.SingletonParametersDisplay
 import com.example.astro.app.setting_user.UserSettingsActivity
 import com.example.astro.databinding.FragmentInformationZodiacSignsBinding
 import org.jsoup.Jsoup
@@ -30,7 +29,7 @@ class InformationZodiacSignsFragment : Fragment(){
     val items = arrayListOf<String>("horo.mail.ru", "goroskop365.ru", "1001goroskop.ru")
     private lateinit var adapterItems : ArrayAdapter<String>
 
-    private var website_fragment : String = "horo.mail.ru"
+    private var websiteFragment : String = "horo.mail.ru"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentInformationZodiacSignsBinding.inflate(inflater, container, false)
@@ -75,7 +74,7 @@ class InformationZodiacSignsFragment : Fragment(){
                     header1 = "Oвен"
                     header2 = "Лев"
                     header3 = "Стрелец"
-                    when (website_fragment) {
+                    when (websiteFragment) {
                         "horo.mail.ru" -> {
                             val doc1 =
                                 Jsoup.connect("https://horo.mail.ru/prediction/aries/today/").get()
@@ -125,7 +124,7 @@ class InformationZodiacSignsFragment : Fragment(){
                     header1 = "Телец"
                     header2 = "Дева"
                     header3 = "Козерог"
-                    when (website_fragment) {
+                    when (websiteFragment) {
                         "horo.mail.ru" -> {
                             val doc1 =
                                 Jsoup.connect("https://horo.mail.ru/prediction/taurus/today/").get()
@@ -175,7 +174,7 @@ class InformationZodiacSignsFragment : Fragment(){
                     header1 = "Близнецы"
                     header2 = "Весы"
                     header3 = "Водолей"
-                    when (website_fragment) {
+                    when (websiteFragment) {
                         "horo.mail.ru" -> {
                             val doc1 =
                                 Jsoup.connect("https://horo.mail.ru/prediction/gemini/today/").get()
@@ -224,7 +223,7 @@ class InformationZodiacSignsFragment : Fragment(){
                     header1 = "Рак"
                     header2 = "Скорпион"
                     header3 = "Рыбы"
-                    when (website_fragment) {
+                    when (websiteFragment) {
                         "horo.mail.ru" -> {
                             val doc1 =
                                 Jsoup.connect("https://horo.mail.ru/prediction/cancer/today/").get()
@@ -294,7 +293,7 @@ class InformationZodiacSignsFragment : Fragment(){
 
         binding.autoCompleteTxt.setOnItemClickListener { parent, view, position, id ->
             val item = parent.getItemAtPosition(position).toString()
-            website_fragment = item
+            websiteFragment = item
             initGetForecast()
 
             binding.textViewHeaderSign1.text = "Знак зодиака загрузка..."
