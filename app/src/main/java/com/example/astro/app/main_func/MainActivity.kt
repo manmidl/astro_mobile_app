@@ -31,6 +31,8 @@ class MainActivity : AppCompatActivity(), WorkWithDatabase, BaseFragmentInterfac
     private var websiteMain : String = "horo.mail.ru"
     private lateinit var loginMethod: String
 
+    private val hello = "hello!"
+
     //второстепенный поток
     private lateinit var secThread: Thread
     private lateinit var runnable: Runnable
