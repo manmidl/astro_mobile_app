@@ -15,9 +15,10 @@ import com.example.astro.databinding.FragmentAddInfBinding
 
 class AddInfFragment : Fragment() {
     private lateinit var binding : FragmentAddInfBinding
-    val items = arrayListOf<String>("Овен", "Лев", "Стрелец", "Телец", "Дева", "Козерог", "Близнецы", "Весы", "Водолей", "Рак", "Скорпион", "Рыбы")
+    //
+    private val signsZodiac = listOf("Овен", "Лев", "Стрелец", "Телец", "Дева", "Козерог", "Близнецы", "Весы", "Водолей", "Рак", "Скорпион", "Рыбы")
     private lateinit var adapterItems : ArrayAdapter<String>
-    private var zodiac : String = "Овен"
+    private var zodiac = "Овен"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,8 +31,8 @@ class AddInfFragment : Fragment() {
         binding.buttonDone.setOnClickListener {
 
             val name = binding.editTextTextPersonName.text.toString().trim()
-            val sign_zodiac = zodiac  //переменная знака зодиака
-            val login_method = "no auth"
+            val signZodiac = zodiac  //переменная знака зодиака
+            val loginMethod = "no auth"
 
             //Ввод данных в локальную БД - SharedPreferences
             val sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
@@ -39,8 +40,8 @@ class AddInfFragment : Fragment() {
 
             if(name.isNotEmpty()) {
                 editor.putString("name", name)
-                editor.putString("sign_zodiac", sign_zodiac)
-                editor.putString("login_method", login_method)
+                editor.putString("sign_zodiac", signZodiac)
+                editor.putString("login_method", loginMethod)
                 editor.apply()
 
                 val intent = Intent(activity, MainActivity::class.java)
@@ -59,7 +60,7 @@ class AddInfFragment : Fragment() {
     }
 
     private fun selectZodiacSign(){
-        adapterItems = ArrayAdapter<String>(requireContext(), R.layout.list_item_website, items)
+        adapterItems = ArrayAdapter<String>(requireContext(), R.layout.list_item_website, signsZodiac)
         binding.autoCompleteTxtZodiacSign.setAdapter(adapterItems)
 
         binding.autoCompleteTxtZodiacSign.setOnItemClickListener { parent, view, position, id ->
@@ -70,8 +71,6 @@ class AddInfFragment : Fragment() {
         binding.autoCompleteTxtZodiacSign.setText(adapterItems.getItem(0), false)
         binding.autoCompleteTxtZodiacSign.requestFocus()
     }
-
-
 
     companion object {
         @JvmStatic

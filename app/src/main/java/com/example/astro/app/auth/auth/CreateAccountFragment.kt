@@ -25,7 +25,8 @@ class CreateAccountFragment : Fragment(), BaseFragmentInterface {
     private lateinit var database: FirebaseDatabase
     private lateinit var myRef : DatabaseReference
 
-    val items = arrayListOf<String>("Овен", "Лев", "Стрелец", "Телец", "Дева", "Козерог", "Близнецы", "Весы", "Водолей", "Рак", "Скорпион", "Рыбы")
+    //избавиться от копипасти
+    private val signsZodiac = listOf("Овен", "Лев", "Стрелец", "Телец", "Дева", "Козерог", "Близнецы", "Весы", "Водолей", "Рак", "Скорпион", "Рыбы")
     private lateinit var adapterItems : ArrayAdapter<String>
     private var zodiac : String = "Овен"
 
@@ -45,11 +46,11 @@ class CreateAccountFragment : Fragment(), BaseFragmentInterface {
 
         binding.buttonResume.setOnClickListener {
             val name = binding.editTextTextPersonName.text.toString().trim()
-            val zodiac_sign = zodiac
+            val zodiacSign = zodiac
 
             val email = binding.editTextEnterEmail.text.toString().trim()
             val password = binding.editTextPassowrd.text.toString().trim()
-            createAccountandSendEmail(name, zodiac_sign, email, password, transaction!!)
+            createAccountAndSendEmail(name, zodiacSign, email, password, transaction!!)
         }
         return binding.root
     }
@@ -59,7 +60,7 @@ class CreateAccountFragment : Fragment(), BaseFragmentInterface {
         selectZodiacSign()
     }
 
-    private fun createAccountandSendEmail(name:String, zodiac_sign: String, email: String, password: String, transaction : FragmentTransaction){
+    private fun createAccountAndSendEmail(name:String, zodiac_sign: String, email: String, password: String, transaction : FragmentTransaction){
         if(email.isEmpty() || password.isEmpty() || name.isEmpty() || zodiac_sign.isEmpty()){
             binding.textViewError.text = "Поля не заполненны!"
             binding.editTextTextPersonName.setHintTextColor(Color.RED)
@@ -117,7 +118,8 @@ class CreateAccountFragment : Fragment(), BaseFragmentInterface {
         return checkEmail
     }
 
-    fun isStrongPassword(password: String): Boolean {
+    //копипаст
+    private fun isStrongPassword(password: String): Boolean {
         val digitRegex = ".*\\d.*"
         val letterRegex = ".*[a-zA-Z].*"
 
@@ -125,7 +127,7 @@ class CreateAccountFragment : Fragment(), BaseFragmentInterface {
     }
 
     private fun selectZodiacSign(){
-        adapterItems = ArrayAdapter<String>(requireContext(), R.layout.list_item_website, items)
+        adapterItems = ArrayAdapter<String>(requireContext(), R.layout.list_item_website, signsZodiac)
         binding.autoCompleteTxtZodiacSign.setAdapter(adapterItems)
 
         binding.autoCompleteTxtZodiacSign.setOnItemClickListener { parent, view, position, id ->

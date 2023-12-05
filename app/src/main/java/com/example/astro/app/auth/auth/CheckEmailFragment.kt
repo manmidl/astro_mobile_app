@@ -9,12 +9,11 @@ import android.widget.Toast
 import androidx.fragment.app.FragmentTransaction
 import com.example.astro.R
 import com.example.astro.app.interfaces.BaseFragmentInterface
-import com.example.astro.app.interfaces.DeleteAccountInterface
 import com.example.astro.databinding.FragmentCheckEmailBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
-class CheckEmailFragment : Fragment(), BaseFragmentInterface, DeleteAccountInterface {
+class CheckEmailFragment : Fragment(), BaseFragmentInterface {
 
     private lateinit var binding : FragmentCheckEmailBinding
     private lateinit var mAuth : FirebaseAuth

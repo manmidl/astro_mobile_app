@@ -26,7 +26,7 @@ class InformationZodiacSignsFragment : Fragment(){
     private lateinit var secThread: Thread
     private lateinit var runnable: Runnable
 
-    val items = arrayListOf<String>("horo.mail.ru", "goroskop365.ru", "1001goroskop.ru")
+    val webSite = arrayListOf<String>("horo.mail.ru", "goroskop365.ru", "1001goroskop.ru")
     private lateinit var adapterItems : ArrayAdapter<String>
 
     private var websiteFragment : String = "horo.mail.ru"
@@ -288,7 +288,7 @@ class InformationZodiacSignsFragment : Fragment(){
 
 
     private fun selectWebSite(){ //Пользовательские функции (работа с интерфейсом)
-        adapterItems = ArrayAdapter<String>(requireContext(), R.layout.list_item_website, items)
+        adapterItems = ArrayAdapter<String>(requireContext(), R.layout.list_item_website, webSite)
         binding.autoCompleteTxt.setAdapter(adapterItems)
 
         binding.autoCompleteTxt.setOnItemClickListener { parent, view, position, id ->
@@ -296,6 +296,7 @@ class InformationZodiacSignsFragment : Fragment(){
             websiteFragment = item
             initGetForecast()
 
+            //cделать как с массивом
             binding.textViewHeaderSign1.text = "Знак зодиака загрузка..."
             binding.textViewHeaderSign2.text = "Знак зодиака загрузка..."
             binding.textViewHeaderSigns3.text = "Знак зодиака загрузка..."

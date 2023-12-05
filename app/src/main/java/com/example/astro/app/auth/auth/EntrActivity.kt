@@ -5,11 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.example.astro.R
 import com.example.astro.app.interfaces.BaseFragmentInterface
-import com.example.astro.app.interfaces.DeleteAccountInterface
 import com.example.astro.databinding.ActivityEntrBinding
 
 
-class EntrActivity : AppCompatActivity(), BaseFragmentInterface, DeleteAccountInterface {
+class EntrActivity : AppCompatActivity(), BaseFragmentInterface {
     private lateinit var binding : ActivityEntrBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
