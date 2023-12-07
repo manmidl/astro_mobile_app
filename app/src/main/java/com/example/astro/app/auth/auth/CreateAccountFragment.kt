@@ -10,7 +10,9 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.example.astro.R
+import com.example.astro.app.databases.databaseSP.SPFunctions
 import com.example.astro.app.interfaces.BaseFragmentInterface
+import com.example.astro.app.passcorrect.PasswordCorrect
 import com.example.astro.databinding.FragmentCreateAccountBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -50,7 +52,7 @@ class CreateAccountFragment : Fragment(), BaseFragmentInterface {
 
             val email = binding.editTextEnterEmail.text.toString().trim()
             val password = binding.editTextPassowrd.text.toString().trim()
-            createAccountAndSendEmail(name, zodiacSign, email, password, transaction!!)
+            createAccountAndSendEmail(name, zodiacSign, email, password, transaction!!) //вызывать через объект
         }
         return binding.root
     }
@@ -61,13 +63,13 @@ class CreateAccountFragment : Fragment(), BaseFragmentInterface {
     }
 
     private fun createAccountAndSendEmail(name:String, zodiac_sign: String, email: String, password: String, transaction : FragmentTransaction){
-        if(email.isEmpty() || password.isEmpty() || name.isEmpty() || zodiac_sign.isEmpty()){
+        if(email.isEmpty() || password.isEmpty() || name.isEmpty() || zodiac_sign.isEmpty()){ //не трогать
             binding.textViewError.text = "Поля не заполненны!"
             binding.editTextTextPersonName.setHintTextColor(Color.RED)
             binding.editTextEnterEmail.setHintTextColor(Color.RED)
             binding.editTextPassowrd.setHintTextColor(Color.RED)
         }
-        else if(!isStrongPassword(password)){
+        else if(!PasswordCorrect().isStrongPassword(password)){ //перевести функцию в отдельный класс
             binding.textViewError.text = "Введённые пароль должен состоять из цифр и букв, и должен быть из 10 или более символов"
             binding.editTextPassowrd.setTextColor(Color.RED)
         }
@@ -91,11 +93,7 @@ class CreateAccountFragment : Fragment(), BaseFragmentInterface {
                                     )
                                     myRef.child("users").child(userId!!).setValue(user) //обращение к узлу и размещение информации
 
-                                    val sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-                                    val editor = sharedPreferences.edit()
-                                    val login_method = "auth"
-                                    editor.putString("login_method", login_method)
-                                    editor.apply()
+                                    SPFunctions(requireContext()).authorizationMethod("auth") //функция метода авторизации
 
                                     val checkEmail = fragmentInfo(email)
                                     replaceFragment(transaction!!, R.id.fragment_holder, checkEmail)
@@ -116,14 +114,6 @@ class CreateAccountFragment : Fragment(), BaseFragmentInterface {
         val checkEmail = CheckEmailFragment()
         checkEmail.arguments = bundle
         return checkEmail
-    }
-
-    //копипаст
-    private fun isStrongPassword(password: String): Boolean {
-        val digitRegex = ".*\\d.*"
-        val letterRegex = ".*[a-zA-Z].*"
-
-        return password.length >= 10 && password.matches(digitRegex.toRegex()) && password.matches(letterRegex.toRegex())
     }
 
     private fun selectZodiacSign(){

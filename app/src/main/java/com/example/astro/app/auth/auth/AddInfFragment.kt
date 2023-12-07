@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import com.example.astro.R
+import com.example.astro.app.databases.databaseSP.SPFunctions
 import com.example.astro.app.main_func.MainActivity
 import com.example.astro.databinding.FragmentAddInfBinding
 
@@ -32,7 +33,6 @@ class AddInfFragment : Fragment() {
 
             val name = binding.editTextTextPersonName.text.toString().trim()
             val signZodiac = zodiac  //переменная знака зодиака
-            val loginMethod = "no auth"
 
             //Ввод данных в локальную БД - SharedPreferences
             val sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
@@ -41,8 +41,9 @@ class AddInfFragment : Fragment() {
             if(name.isNotEmpty()) {
                 editor.putString("name", name)
                 editor.putString("sign_zodiac", signZodiac)
-                editor.putString("login_method", loginMethod)
                 editor.apply()
+
+                SPFunctions(requireContext()).authorizationMethod("no auth")
 
                 val intent = Intent(activity, MainActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)

@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentTransaction
 import com.example.astro.R
+import com.example.astro.app.databases.databaseSP.SPFunctions
 import com.example.astro.app.main_func.MainActivity
 import com.example.astro.app.interfaces.BaseFragmentInterface
 import com.example.astro.databinding.FragmentLogInBinding
@@ -59,6 +60,8 @@ class LogInFragment : Fragment(), BaseFragmentInterface {
         mAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) { //вход произведён успешно
+
+                    ////////////////////////
                     //Проверка подтверждения email
                     val user: FirebaseUser? = mAuth.currentUser
                     user?.reload()?.addOnCompleteListener { task ->
@@ -67,28 +70,31 @@ class LogInFragment : Fragment(), BaseFragmentInterface {
                             val isEmailVerified = updatedUser?.isEmailVerified
 
                             if (isEmailVerified == true) {
+                                //инт
                                 val intent = Intent(activity, MainActivity::class.java)
 
                                 //способ входа юзера добавлен 12:06 01.12.2023
-                                val sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-                                val editor = sharedPreferences.edit()
-                                val login_method = "auth"
-                                editor.putString("login_method", login_method)
-                                editor.apply()
+                                SPFunctions(requireContext()).authorizationMethod("auth")
 
+                                //интерфейсная хуйня
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
                                 startActivity(intent)
                             }else{
-                                binding.textViewError.text = "Почта не подтверждена!"
+                                binding.textViewError.text = "Почта не подтверждена!" //интерфейсаня хуйн
                                 binding.editTextEnterEmail.setHintTextColor(Color.RED)
-                                user?.sendEmailVerification()
-                                val checkEmailFragment = fragmentInfo(email)
+
+                                user?.sendEmailVerification() //повторная отправка письма подтверждения
+
+                                val checkEmailFragment = fragmentInfo(email) //интерфейсная хуня
                                 replaceFragment(transaction!!, R.id.fragment_holder, checkEmailFragment)
                             }
                         }
                     }
-                } else {
-                    binding.textViewError.text = "Неправильные имя пользователя или пароль!"
+                }
+                //////////////////
+                else {
+                    //интерфейсная хуйня
+                    binding.textViewError.text = "Неправильные имя пользователя или пароль!" //интерфейсная хуйняя
                     binding.editTextEnterEmail.setHintTextColor(Color.RED)
                     binding.editTextEnterPassword.setHintTextColor(Color.RED)
                 }
