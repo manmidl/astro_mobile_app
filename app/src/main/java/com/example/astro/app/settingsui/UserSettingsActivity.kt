@@ -1,4 +1,4 @@
-package com.example.astro.app.setting_user
+package com.example.astro.app.settingsui
 
 import android.content.Context
 import android.content.Intent
@@ -11,8 +11,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.example.astro.R
 import com.example.astro.app.auth.auth.EntrActivity
+import com.example.astro.app.databases.firebase.firebaseAuth.AuthFunctions
 import com.example.astro.app.interfaces.WorkWithDatabase
-import com.example.astro.app.main_func.MainActivity
+import com.example.astro.app.listdata.ListDataRepository
+import com.example.astro.app.mainui.MainActivity
 import com.example.astro.databinding.ActivityUserSettingsBinding
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
@@ -25,26 +27,25 @@ class UserSettingsActivity : AppCompatActivity(), WorkWithDatabase {
 
     private lateinit var binding : ActivityUserSettingsBinding
 
-    val itemsSign = arrayListOf<String>("Овен", "Лев", "Стрелец", "Телец", "Дева", "Козерог", "Близнецы", "Весы", "Водолей", "Рак", "Скорпион", "Рыбы")
     private lateinit var adapterItemsSign : ArrayAdapter<String>
 
-    private lateinit var login_method: String
+    private lateinit var loginMethod: String
     private lateinit var sharedPreferences : SharedPreferences
 
     private var name : String = ""
-    private var sign_zodiac: String = ""
+    private var signZodiac: String = ""
 
     private lateinit var mAuth : FirebaseAuth
     private lateinit var database: FirebaseDatabase
 
-
+    //переделать некоторые элементы
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityUserSettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-        login_method = sharedPreferences.getString("login_method", "default value")!!
+        loginMethod = sharedPreferences.getString("login_method", "default value")!!
 
         mAuth = FirebaseAuth.getInstance()
         database = com.google.firebase.ktx.Firebase.database
@@ -71,7 +72,7 @@ class UserSettingsActivity : AppCompatActivity(), WorkWithDatabase {
 
         binding.buttonSave.setOnClickListener {
 
-            if(login_method == "auth"){
+            if(loginMethod == "auth"){
                 val userId = com.google.firebase.ktx.Firebase.auth.currentUser?.uid
                 val myRef = database.getReference("users/$userId")
 
@@ -79,24 +80,24 @@ class UserSettingsActivity : AppCompatActivity(), WorkWithDatabase {
                 var oldPassword = binding.editTextOldPassword.text.toString().trim()
                 var newPassword = binding.editTextNewPassword.text.toString().trim()
 
-                if(name.isNotEmpty()) {
+                if(name.isNotEmpty()) { // порядок
                     val updates = hashMapOf<String, Any>("personName" to name)
                     myRef.updateChildren(updates)
 
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                 }
-                if(sign_zodiac.isNotEmpty()) {
-                    val updates = hashMapOf<String, Any>("zodiacSign" to sign_zodiac)
+                if(signZodiac.isNotEmpty()) { //порядок
+                    val updates = hashMapOf<String, Any>("zodiacSign" to signZodiac)
                     myRef.updateChildren(updates)
 
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                 }
-                else if(oldPassword.isNotEmpty() && newPassword.isNotEmpty()) {
+                else if(oldPassword.isNotEmpty() && newPassword.isNotEmpty()) { //не порядок
                     if (!isStrongPassword(newPassword)) {
-                        binding.textViewErr.text = "Введённые пароль должен состоять из цифр и букв, и должен быть из 10 или более символов"
-                    } else {
+                        binding.textViewErr.text = R.string.attetion_char_pass.toString()
+                    } else { //----------------------------
                         val user = mAuth.currentUser
                         val credential = EmailAuthProvider.getCredential(user?.email!!, oldPassword)
 
@@ -123,18 +124,19 @@ class UserSettingsActivity : AppCompatActivity(), WorkWithDatabase {
                                     binding.textViewErr.text = "Старый пароль неверный!"
                                 }
                             }
+
                     }
                 }
             }
 
-            else if(login_method == "no auth"){
+            else if(loginMethod == "no auth"){
                 val editor = sharedPreferences.edit()
                 name = binding.editTextTextPersonName.text.toString().trim()
                 if(name.isNotEmpty()) {
                     editor.putString("name", name)
                 }
-                else if(sign_zodiac.isNotEmpty()){
-                    editor.putString("sign_zodiac", sign_zodiac) //изменить
+                else if(signZodiac.isNotEmpty()){
+                    editor.putString("sign_zodiac", signZodiac) //изменить
                 }
                 editor.apply()
 
@@ -145,8 +147,8 @@ class UserSettingsActivity : AppCompatActivity(), WorkWithDatabase {
     }
     //отобразить данные пользователя
     private fun dataDisplayUser(){
-        if(login_method == "auth"){
-            getDataRealtimeDatabase { mutMap ->
+        if(loginMethod == "auth"){
+            getDataInRealtimeDatabase { mutMap ->
                 val namePerson = mutMap["personName"]!!
                 val zodiacSign = mutMap["zodiacSign"]!! //проверить правильно ли называется
 
@@ -154,7 +156,7 @@ class UserSettingsActivity : AppCompatActivity(), WorkWithDatabase {
                 binding.autoCompleteTxtZodiacSign.setText(zodiacSign, false)
             }
         }
-        else if(login_method == "no auth"){
+        else if(loginMethod == "no auth"){
             val namePerson = sharedPreferences.getString("name", "default_value")
             val zodiacSigns = sharedPreferences.getString("sign_zodiac", "default_value")
 
@@ -168,12 +170,12 @@ class UserSettingsActivity : AppCompatActivity(), WorkWithDatabase {
     }
     //сменить знак зодиака
     private fun changeZodiacSign(){
-        adapterItemsSign = ArrayAdapter<String>(this, R.layout.list_item_website, itemsSign)
+        adapterItemsSign = ArrayAdapter<String>(this, R.layout.list_item_website, ListDataRepository.signsZodiac)
         binding.autoCompleteTxtZodiacSign.setAdapter(adapterItemsSign)
 
         binding.autoCompleteTxtZodiacSign.setOnItemClickListener { parent, view, position, id ->
             val item = parent.getItemAtPosition(position).toString()
-            sign_zodiac = item
+            signZodiac = item
         }
     }
     private fun isStrongPassword(password: String): Boolean {
@@ -183,14 +185,14 @@ class UserSettingsActivity : AppCompatActivity(), WorkWithDatabase {
         return password.length >= 10 && password.matches(digitRegex.toRegex()) && password.matches(letterRegex.toRegex())
     }
     private fun logOutOfYourAccount(){
-        if(login_method == "auth"){
+        if(loginMethod == "auth"){
             mAuth.signOut()
             val intent = Intent(this, EntrActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
             finish()
         }
-        else if(login_method == "no auth"){
+        else if(loginMethod == "no auth"){
             val editor = sharedPreferences.edit()
             editor.clear()
             editor.apply()

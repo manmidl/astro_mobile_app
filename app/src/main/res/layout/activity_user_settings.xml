@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:background="@drawable/back_s"
     android:layout_height="match_parent"
-    tools:context=".app.setting_user.UserSettingsActivity">
+    tools:context=".app.settingsui.UserSettingsActivity">
 
     <ImageView
         android:id="@+id/imageViewLogo"

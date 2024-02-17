@@ -1,4 +1,4 @@
-package com.example.astro.app.main_func
+package com.example.astro.app.mainui
 
 import android.content.Context
 import android.content.Intent
@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseUser
 
 class SplashScreen : AppCompatActivity(){
 
+    //переделать некоторые элементы
     private lateinit var mAuth : FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

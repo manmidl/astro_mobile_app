@@ -1,4 +1,4 @@
-package com.example.astro.app.main_func
+package com.example.astro.app.mainfunc
 
 object SingletonParametersDisplay {
     //какую стихию выбрал юзер

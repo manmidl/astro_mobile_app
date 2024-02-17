@@ -8,12 +8,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.FragmentTransaction
 import com.example.astro.R
-import com.example.astro.app.interfaces.BaseFragmentInterface
+import com.example.astro.app.fragments_work.ActionsFragments
 import com.example.astro.databinding.FragmentCheckEmailBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
-class CheckEmailFragment : Fragment(), BaseFragmentInterface {
+class CheckEmailFragment : Fragment() {
 
     private lateinit var binding : FragmentCheckEmailBinding
     private lateinit var mAuth : FirebaseAuth
@@ -43,7 +43,7 @@ class CheckEmailFragment : Fragment(), BaseFragmentInterface {
                     if (isEmailVerified == true) {
                         Toast.makeText(requireContext(), "Почта успешно подтверждена!", Toast.LENGTH_SHORT).show()
                         val logInFragment = LogInFragment()
-                        replaceFragment(transaction!!, R.id.fragment_holder, logInFragment)
+                        ActionsFragments().replaceFragment(transaction!!, R.id.fragment_holder, logInFragment)
                     }else{
                         Toast.makeText(requireContext(), "Почта не подтверждена!", Toast.LENGTH_SHORT).show()
                     }

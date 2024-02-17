@@ -4,11 +4,11 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.example.astro.R
-import com.example.astro.app.interfaces.BaseFragmentInterface
+import com.example.astro.app.fragments_work.ActionsFragments
 import com.example.astro.databinding.ActivityEntrBinding
 
 
-class EntrActivity : AppCompatActivity(), BaseFragmentInterface {
+class EntrActivity : AppCompatActivity() {
     private lateinit var binding : ActivityEntrBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,16 +32,16 @@ class EntrActivity : AppCompatActivity(), BaseFragmentInterface {
         }
         binding.buttonLogIn.setOnClickListener {
             actionLaunchFragments()
-            addFragment(supportFragmentManager, R.id.fragment_holder, LogInFragment.newInstance())
+            ActionsFragments().addFragment(supportFragmentManager, R.id.fragment_holder, LogInFragment.newInstance())
         }
         //кнопка продожить без регистрации
         binding.buttonNextStep.setOnClickListener {
             actionLaunchFragments()
-            addFragment(supportFragmentManager, R.id.fragment_holder, AddInfFragment.newInstance())
+            ActionsFragments().addFragment(supportFragmentManager, R.id.fragment_holder, AddInfFragment.newInstance())
         }
         binding.buttonRegistred.setOnClickListener {
             actionLaunchFragments()
-            addFragment(supportFragmentManager,
+            ActionsFragments().addFragment(supportFragmentManager,
                 R.id.fragment_holder,
                 CreateAccountFragment.newInstance()
             )

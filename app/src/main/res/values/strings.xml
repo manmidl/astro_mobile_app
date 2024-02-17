@@ -12,6 +12,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="what_is_your_zodiac_sign">Какой ваш знак зодиака?</string>
     <string name="what_is_your_name">Как Вас зовут?</string>
+    <string name="warning_name_empty">Поле имени не должно быть пустым!</string>
 
     <!--Create Account-->
     <string name="done">ГОТОВО!</string>
@@ -57,4 +58,7 @@
     <string name="save">Сохранить изменения</string>
     <string name="support">Написать в поддержку</string>
     <string name="log_out_account">Выйти из аккаунта</string>
+    <string name="attetion_char_pass">Введённые пароль должен состоять из цифр и букв, и должен быть из 10 или более символов</string>
+
+
 </resources>

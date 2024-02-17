@@ -8,12 +8,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.FragmentTransaction
 import com.example.astro.R
-import com.example.astro.app.interfaces.BaseFragmentInterface
+import com.example.astro.app.fragments_work.ActionsFragments
 import com.example.astro.databinding.FragmentResetPasswordBinding
 import com.google.firebase.auth.FirebaseAuth
 
-
-class ResetPasswordFragment : Fragment(), BaseFragmentInterface {
+class ResetPasswordFragment : Fragment() {
     private lateinit var binding : FragmentResetPasswordBinding
     private lateinit var mAuth : FirebaseAuth
     private lateinit var transaction : FragmentTransaction
@@ -38,13 +37,13 @@ class ResetPasswordFragment : Fragment(), BaseFragmentInterface {
                         .addOnCompleteListener { signInMethodsTask ->
                             if (signInMethodsTask.isSuccessful) {
                                 mAuth.sendPasswordResetEmail(email).addOnCompleteListener { task ->
-                                        if (task.isSuccessful) {
-                                            Toast.makeText(requireContext(), "На ваш email отправлена ссылка для восстановления пароля", Toast.LENGTH_LONG).show()
-                                            replaceFragment(transaction!!, R.id.fragment_holder, logInFragment)
-                                        } else {
-                                            Toast.makeText(requireContext(), "Произошла ошибка при отправке ссылки на сброс пароля.", Toast.LENGTH_LONG).show()
-                                        }
+                                    if (task.isSuccessful) {
+                                        Toast.makeText(requireContext(), "На ваш email отправлена ссылка для восстановления пароля", Toast.LENGTH_LONG).show()
+                                        ActionsFragments().replaceFragment(transaction!!, R.id.fragment_holder, logInFragment)
+                                    } else {
+                                        Toast.makeText(requireContext(), "Произошла ошибка при отправке ссылки на сброс пароля.", Toast.LENGTH_LONG).show()
                                     }
+                                }
                             } else {
                                 Toast.makeText(requireContext(), "Извините что-то пошло не так...", Toast.LENGTH_LONG).show()
                             }

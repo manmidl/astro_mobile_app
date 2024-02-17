@@ -8,15 +8,15 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 
 interface WorkWithDatabase {
-    fun getDataRealtimeDatabase(callback: (MutableMap<String, String>) ->
+    fun getDataInRealtimeDatabase(callback: (Map<String, String>) ->
     Unit){
         val userId = Firebase.auth.currentUser?.uid
         val myRef = FirebaseDatabase.getInstance().getReference("users").child(userId!!)
-        val mutableMap = mutableMapOf<String, String>() //dataMap
+        val mutableMap = mutableMapOf<String, String>()
 
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                //создать доп доп функцию чтобы избавиться от копипасты
+
                 var email = dataSnapshot.child("email").getValue(String::class.java)!!
                 var personName = dataSnapshot.child("personName").getValue(String::class.java)!!
                 var zodiacSign = dataSnapshot.child("zodiacSign").getValue(String::class.java)!!

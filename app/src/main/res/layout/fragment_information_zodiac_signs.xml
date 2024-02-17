@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/back_s"
-    tools:context=".app.main_func.InformationZodiacSignsFragment">
+    tools:context=".app.mainui.InformationZodiacSignsFragment">
 
 
     <ScrollView
